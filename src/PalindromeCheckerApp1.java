@@ -1,27 +1,41 @@
-//USE CASE 10
+//USE CASE 11
 
 import java.util.Scanner;
 
-public class PalindromeCheckerApp1{
-
-    public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Input: ");
-        String input = scanner.nextLine();
-
+class PalindromeChecker {
+    public boolean checkPalindrome(String input){
+        if(input == null){
+            return false;
+        }
         String normalized = input.replaceAll("\\s+","").toLowerCase();
 
-        boolean isPalindrome = true;
+        char[] chars = normalized.toCharArray();
+        int start = 0;
+        int end = chars.length - 1;
 
-        for(int i=0; i<normalized.length()/2;i++){
-            if(normalized.charAt(i)!=normalized.charAt(normalized.length()-1-i)){
-                isPalindrome = false;
-                break;
+        while(start<end){
+            if(chars[start]!=chars[end]){
+                return false;
             }
+            start++;
+            end--;
         }
-        System.out.println("Is Palindrome?: "+isPalindrome);
+        return true;
+    }
+}
+public class PalindromeCheckerApp1{
+    public static void main(String[]args){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Input: ");
+        String input = scanner.nextLine();
+
+        PalindromeChecker checker = new PalindromeChecker();
+
+        boolean result = checker.checkPalindrome(input);
+
+        System.out.println("Is Palindrome?: "+result);
+
         scanner.close();
     }
 }
